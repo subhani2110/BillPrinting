@@ -1,0 +1,238 @@
+﻿<Window x:Class="PrintingApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:PrintingApp"
+        mc:Ignorable="d" Title="Billing App" Height="700" Width="1293" MinWidth="1300" MinHeight="700"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized" WindowStyle="None" FontFamily="Calibri"
+        FontSize="18" MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--ToolBar-->
+
+        <Grid Grid.Row="0" Background="DarkSlateGray" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right" Grid.Column="1">
+                <!--Min-->
+                <Button x:Name="Min" Width="30" Height="30" BorderThickness="0" Cursor="Hand" Click="Min_Click" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assests/minimize_window_96px.png" Stretch="Uniform"/>
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!--Max-->
+                <Button x:Name="Max" Width="30" Height="30" BorderThickness="0" Cursor="Hand" Click="Max_Click" >
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assests/maximize_window_96px.png" Stretch="Uniform"/>
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!--Close-->
+                <Button x:Name="Exit" Width="30" Height="30" BorderThickness="0" Cursor="Hand" Click="Exit_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assests/close_window_96px.png" Stretch="UniformToFill" TileMode="Tile"/>
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <!--Body-->
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Margin="10" Text="Item Name : "/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="10" Text="Quantity : "/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="10" Text="Rate : "/>
+                    
+                    <TextBlock Grid.Row="6" Grid.Column="0" Margin="10" Text="Paid : "/>
+
+
+                    <ComboBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="ItemName" Width="200"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="10" x:Name="qty"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="10" x:Name="rate"/>
+                    <!--<DatePicker Grid.Row="3" Grid.Column="1" Margin="10" x:Name="Date"/>-->
+
+                    <Button Grid.Row="5" Grid.Column="1" Margin="10" x:Name="Add" Click="Add_Click">
+                        <materialDesign:PackIcon Kind="AddBox"/>
+                    </Button>
+                    
+                    <TextBox Grid.Row="6" Grid.Column="1" Margin="10" x:Name="paidtb" TextChanged="paidtb_TextChanged"/>
+
+                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <Button Height="50" Width="70" Margin="10" x:Name="Clear" Click="Clear_Click">
+                            <materialDesign:PackIcon Height="30" Width="40" Kind="Delete"/>
+                        </Button>
+                        <Button Height="50" Width="70"  Margin="10" x:Name="print" Click="print_Click">
+                            <materialDesign:PackIcon Height="30" Width="40" Kind="Printer"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <ScrollViewer Margin="10" Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Margin="10">
+                            <TextBlock Text="Items List" FontSize="20" Margin="10" HorizontalAlignment="Center"/>
+                            <ListView x:Name="List" Margin="10" FontSize="18">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="False">
+                                        <GridView.Columns>
+                                            <GridViewColumn Header="Sr #" DisplayMemberBinding="{Binding Sr}" />
+                                            <GridViewColumn Header="ItemName" Width="auto" DisplayMemberBinding="{Binding ItemName}" />
+                                            <GridViewColumn Header="Rate" DisplayMemberBinding="{Binding Rate}" />
+                                            <GridViewColumn Header="Qty" DisplayMemberBinding="{Binding Qty}" />
+                                            <GridViewColumn Header="Total" DisplayMemberBinding="{Binding Total}" />
+                                        </GridView.Columns>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                                        <TextBlock Text="Units : " Grid.Column="2"  VerticalAlignment="Center"  
+                                    HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="units" Margin="5"  VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                        <TextBlock Text="Gross Total : " Grid.Column="2"  VerticalAlignment="Center"  
+                                    HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="gross" Margin="5"  VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Right" >
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                        <TextBlock Text="Amount Payable : " Grid.Column="2"  VerticalAlignment="Center"  
+                                    HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="payable" Margin="5"  VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                        <TextBlock Text="Amount Paid : " Grid.Column="2"  VerticalAlignment="Center"  
+                                    HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="paid" Margin="5"  VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" >
+                                        <TextBlock Text="Balance : " Grid.Column="2"  VerticalAlignment="Center"  
+                                    HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="balance" Margin="5"  VerticalAlignment="Center" />
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2" Background="DarkSlateGray"/>
+
+    </Grid>
+</Window>
